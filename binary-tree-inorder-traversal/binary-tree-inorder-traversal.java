@@ -16,10 +16,30 @@
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
-        this.getInorderTraversal(root,result);
+        //this.getInorderTraversal(root,result);
+        result =  this.getIterativeInorder(root);
         return result;
     }
     
+    // iterative approcach
+    
+    private List<Integer> getIterativeInorder(TreeNode root){
+        Stack<TreeNode> stack = new Stack<>();
+        List<Integer> list = new ArrayList<>();
+        //stack.push(root);
+        while(root!=null || !stack.isEmpty()){
+           while(root !=null){
+               stack.push(root);
+               root = root.left;
+           }
+            root = stack.pop();
+            list.add(root.val);
+            root = root.right;
+        }
+        return list;
+    }
+    
+    // recursive approact
     private void getInorderTraversal(TreeNode root, List<Integer> list){
         if(root == null){
             return;
