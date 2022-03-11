@@ -1,25 +1,21 @@
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>>  result = new ArrayList<>();
-        this.getCombinations(result,new ArrayList<>(),nums,nums.length);
+        List<List<Integer>> result = new ArrayList<>();
+        this.getPermutation(nums,new ArrayList<>(),result,nums.length);
         return result;
-        
     }
     
-    private void getCombinations(List<List<Integer>> result,List<Integer> temp , int[] nums , int k){
-        if(k == 0){
-            result.add(new ArrayList(temp));
-            return ;
-        }
+    private void getPermutation(int[] nums,List<Integer> list,List<List<Integer>> result,int k){
         
-        for(int start =0 ; start < nums.length;start++){
-           if(temp.contains(nums[start])) continue;
-            temp.add(nums[start]);
-            getCombinations(result, temp, nums , k-1);
-            temp.remove(temp.size()-1);
+        if(k == 0){
+            result.add(new ArrayList(list));
+            return;
+        }
+        for(int index = 0; index< nums.length;index++){
+            if(list.contains(nums[index])) continue;
+            list.add(nums[index]);
+            this.getPermutation(nums,list,result,k-1);
+            list.remove(list.size()-1);
         }
     }
 }
-
-// 1 2 3
-// 1 1 3
